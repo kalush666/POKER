@@ -39,4 +39,22 @@ def create_players_table():
     conn.close()
     return True
 
-create_players_table()
+def sign_up(username, password):
+    connection = create_connection()
+    if connection:
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+def login(username, password):
+    connection = create_connection()
+    if connection:
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+        result = cursor.fetchone()
+        cursor.close()
+        connection.close()
+        return result is not None
+    return False

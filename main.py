@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from mysql_integration import sign_up, login
+from MySql import sign_up, login
 
 class LoginApp:
     def __init__(self, root):
@@ -19,9 +19,6 @@ class LoginApp:
 
         self.login_button = tk.Button(root, text="Login", command=self.login)
         self.login_button.pack()
-
-        self.signup_button = tk.Button(root, text="Sign Up", command=self.sign_up)
-        self.signup_button.pack()
 
     def login(self):
         username = self.username_entry.get()
