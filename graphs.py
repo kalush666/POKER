@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-#Example A: Analyze Achievements by Day and Night
+# Example A: Analyze Achievements by Day and Night
 # Load data
 data = pd.read_csv('players_data.csv')
 
@@ -22,7 +22,7 @@ plt.xlabel('Period')
 plt.ylabel('Average Score')
 plt.show()
 
-#Example B: Compare Achievements of Two Players
+# Example B: Compare Achievements of Two Players
 # Load data
 data = pd.read_csv('players_data.csv')
 
@@ -42,15 +42,15 @@ plt.xlabel('Player')
 plt.ylabel('Average Score')
 plt.show()
 
-#Example C: Analyze Playing Hours and Performance Over Time
+# Example C: Analyze Playing Hours and Performance Over Time
 # Load data
 data = pd.read_csv('players_data.csv')
 
 # Filter data for a specific player
-player_data = data[data['player_id'] == 1]
+player_data = data[data['player_id'] == 1].copy()
 
 # Extract hour from time
-player_data['hour'] = pd.to_datetime(player_data['time'], format='%H:%M:%S').dt.hour
+player_data.loc[:, 'hour'] = pd.to_datetime(player_data['time'], format='%H:%M:%S').dt.hour
 
 # Count occurrences of each hour
 hour_counts = player_data['hour'].value_counts().sort_index()
@@ -62,15 +62,15 @@ plt.title('Playing Hours Distribution for Player 1')
 plt.ylabel('')
 plt.show()
 
-#Example D: Analyze Performance Over Time
+# Example D: Analyze Performance Over Time
 # Load data
 data = pd.read_csv('players_data.csv')
 
 # Filter data for a specific player
-player_data = data[data['player_id'] == 1]
+player_data = data[data['player_id'] == 1].copy()
 
 # Convert date to datetime
-player_data['date'] = pd.to_datetime(player_data['date'])
+player_data.loc[:, 'date'] = pd.to_datetime(player_data['date'])
 
 # Group by date and calculate mean score
 daily_scores = player_data.groupby('date')['score'].mean()
