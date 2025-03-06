@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Example A: Analyze Achievements by Day and Night
 # Load data
 data = pd.read_csv('players_data.csv')
 
@@ -22,7 +21,12 @@ plt.xlabel('Period')
 plt.ylabel('Average Score')
 plt.show()
 
-# Example B: Compare Achievements of Two Players
+# Conclusion
+print("Conclusion: The graph shows the average scores achieved during the day and night. This helps determine if players perform better during specific times of the day.")
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
 # Load data
 data = pd.read_csv('players_data.csv')
 
@@ -42,7 +46,13 @@ plt.xlabel('Player')
 plt.ylabel('Average Score')
 plt.show()
 
-# Example C: Analyze Playing Hours and Performance Over Time
+# Conclusion
+print("Conclusion: The graph compares the average scores of two players, providing insights into their relative performance.")
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
 # Load data
 data = pd.read_csv('players_data.csv')
 
@@ -62,7 +72,12 @@ plt.title('Playing Hours Distribution for Player 1')
 plt.ylabel('')
 plt.show()
 
-# Example D: Analyze Performance Over Time
+# Conclusion
+print("Conclusion: The pie chart shows the distribution of playing hours for a specific player, indicating their most active times.")
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
 # Load data
 data = pd.read_csv('players_data.csv')
 
@@ -83,3 +98,6 @@ plt.xlabel('Date')
 plt.ylabel('Average Score')
 plt.grid(True)
 plt.show()
+
+# Conclusion
+print("Conclusion: The line graph shows the performance of a specific player over time, highlighting trends and patterns in their scores.")
