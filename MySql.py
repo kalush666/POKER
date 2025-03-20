@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 def create_connection():
     try:
         return mysql.connector.connect(
@@ -11,6 +12,7 @@ def create_connection():
     except mysql.connector.Error as err:
         print(f"Database connection error: {err}")
         return None
+
 
 def create_players_table():
     conn = create_connection()
@@ -34,27 +36,48 @@ def create_players_table():
     )
     """)
 
+    # Create users table
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        password VARCHAR(100) NOT NULL
+    )
+    """)
+
     conn.commit()
     cursor.close()
     conn.close()
     return True
 
+
 def sign_up(username, password):
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
-        connection.commit()
-        cursor.close()
-        connection.close()
+        try:
+            cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
+            connection.commit()
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            raise
+        finally:
+            cursor.close()
+            connection.close()
+
 
 def login(username, password):
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
-        result = cursor.fetchone()
-        cursor.close()
-        connection.close()
-        return result is not None
+        try:
+            cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+            result = cursor.fetchone()
+            return result is not None
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return False
+        finally:
+            cursor.close()
+            connection.close()
     return False
